@@ -11,12 +11,15 @@ type RootStackParamList = {
   Home: undefined;
   Details: undefined;
 };
+
+//type은 공식문서를 보고 해보자. react navigation
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
 // 매개변수 return값 변수에다가 타입을 붙인것
 function HomeScreen({navigation}: HomeScreenProps) {
   //매개변수
   const onClick = useCallback(() => {
+    //react native에서의 화면 전화하는 방법 참조속성은 Screen name
     navigation.navigate('Details');
   }, [navigation]);
 
@@ -37,7 +40,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
           style={{padding: 20, backgroundColor: 'blue'}}>
           {/* react native는 View에 주면 폰트색안바뀜 Text자체에 컬러를 줘야함. */}
           <Text style={{color: 'white'}}>Home Screen</Text>
-          {/* Text는 항상 text component로 감싸줘야함 */}
+          {/* Text는 항상 Text component로 감싸줘야함 */}
         </Pressable>
       </View>
       <View
@@ -53,6 +56,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
   );
 }
 
+//navigation prop는 어디서 전달했나?
+//Screen의 component에 넣은 component는 Screen comonent에서
+// value component에게 navigation ,router라는 props를 전달.
 function DetailsScreen({navigation}: DetailsScreenProps) {
   const onClick = useCallback(() => {
     navigation.navigate('Home');
